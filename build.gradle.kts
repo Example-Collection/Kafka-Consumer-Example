@@ -23,19 +23,12 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-noarg")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-security")
-    implementation("mysql:mysql-connector-java")
-    implementation("org.hibernate:hibernate-core:5.4.2.Final")
-    implementation("io.jsonwebtoken:jjwt:0.9.1")
-    implementation("io.springfox:springfox-boot-starter:3.0.0")
     implementation("org.apache.kafka:kafka-clients")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.11.4")
+    implementation("com.fasterxml.jackson.core:jackson-core:2.11.4")
     testImplementation(kotlin("test-junit"))
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("junit:junit:4.13.1")
-    testImplementation("com.h2database:h2")
-    testImplementation("org.apache.httpcomponents:httpclient:4.5.11")
 }
 
 tasks.test {

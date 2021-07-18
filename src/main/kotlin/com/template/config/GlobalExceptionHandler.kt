@@ -20,6 +20,7 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(value = [Exception::class])
     protected fun handleApiException(exception: Exception, request: WebRequest): ResponseEntity<Any> {
+        exception.printStackTrace()
         return when (exception) {
             is ApiException -> {
                 handleExceptionInternal(exception, null, HttpHeaders(), exception.httpStatus, request)

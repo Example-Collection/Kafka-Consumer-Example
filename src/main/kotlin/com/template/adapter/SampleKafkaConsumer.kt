@@ -18,7 +18,7 @@ import javax.annotation.PreDestroy
 
 @Service
 class SampleKafkaConsumer(
-    private val kafkaProperties: KafkaProperties,
+    kafkaProperties: KafkaProperties,
     private val sampleService: SampleService
     ) {
 
@@ -36,7 +36,6 @@ class SampleKafkaConsumer(
     @PostConstruct
     fun start() {
         logger.info("Kafka consumer starting..")
-//        this.consumer = KafkaConsumer<String, String>(kafkaProperties.getConsumerProps())
         Runtime.getRuntime().addShutdownHook(Thread(this::shutdown))
         consumer.subscribe(Collections.singleton(TOPIC_MESSAGE))
         logger.info("Kafka consumer started.")

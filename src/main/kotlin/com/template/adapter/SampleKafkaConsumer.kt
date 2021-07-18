@@ -69,5 +69,4 @@ class SampleKafkaConsumer(
         isClosed.set(true)
         consumer.wakeup()
     }
-
 }

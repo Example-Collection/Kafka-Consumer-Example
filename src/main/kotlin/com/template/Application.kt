@@ -1,18 +1,14 @@
 package com.template
 
-import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
 import org.springframework.boot.runApplication
-import org.springframework.context.annotation.Bean
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.context.annotation.Configuration
 
-@SpringBootApplication
-@EnableJpaAuditing
+@Configuration
+@EnableAutoConfiguration(exclude=[DataSourceAutoConfiguration::class, HibernateJpaAutoConfiguration::class])
 class Application {
-    @Bean
-    fun passwordEncoder(): BCryptPasswordEncoder {
-        return BCryptPasswordEncoder(10)
-    }
 }
 fun main(args: Array<String>) {
     runApplication<Application>(*args)

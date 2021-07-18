@@ -1,6 +1,5 @@
 package com.template.config
 
-import com.template.auth.exception.AuthenticateException
 import com.template.common.dto.ErrorResponseDto
 import com.template.common.exception.ApiException
 import com.template.common.tools.DateConverter
@@ -24,9 +23,6 @@ class GlobalExceptionHandler : ResponseEntityExceptionHandler() {
         return when (exception) {
             is ApiException -> {
                 handleExceptionInternal(exception, null, HttpHeaders(), exception.httpStatus, request)
-            }
-            is AuthenticateException -> {
-                handleExceptionInternal(exception, null, HttpHeaders(), HttpStatus.UNAUTHORIZED, request)
             }
             else -> handleExceptionInternal(exception, null, HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request)
         }

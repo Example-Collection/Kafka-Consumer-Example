@@ -3,6 +3,7 @@ package com.template.adapter
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.template.config.KafkaProperties
 import com.template.domain.event.SampleEvent
+import com.template.sample.SampleService
 import org.apache.kafka.clients.consumer.ConsumerRecords
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.kafka.common.errors.WakeupException
@@ -16,7 +17,10 @@ import javax.annotation.PostConstruct
 import javax.annotation.PreDestroy
 
 @Service
-class SampleKafkaConsumer(private val kafkaProperties: KafkaProperties) {
+class SampleKafkaConsumer(
+    private val kafkaProperties: KafkaProperties,
+    private val sampleService: SampleService
+    ) {
 
     private val logger = LoggerFactory.getLogger(SampleKafkaConsumer::class.java)
 
@@ -45,6 +49,7 @@ class SampleKafkaConsumer(private val kafkaProperties: KafkaProperties) {
                         logger.info("Consumed message in $TOPIC_MESSAGE: ${record.value()}")
                         val objectMapper = ObjectMapper()
                         val sampleEvent = objectMapper.readValue(record.value(), SampleEvent::class.java)
+                        sampleService.onMessage(sampleEvent.messageOne, sampleEvent.messageTwo)
                     }
                 }
                 consumer.commitSync()
